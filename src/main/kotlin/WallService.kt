@@ -18,7 +18,7 @@ class WallService {
 
         for ((index, p) in posts.withIndex()) {
             if (post.id == posts[index].id) {
-                val newPost = p.copy(id = post.id, ownerId = p.ownerId, date = p.date, text = post.text, )
+                val newPost = p.copy(id = post.id, ownerId = p.ownerId, date = p.date, text = post.text)
                 posts[index] = newPost
                 return true
             }
@@ -26,16 +26,37 @@ class WallService {
         return false
     }
 
-    fun printPosts(){
-        for (post in posts){
+    fun printPosts() {
+        for (post in posts) {
             println(" " + post.id + " - " + post.text)
-            for (att in post.attachments){
-                println("Вложение: " + att.type + " - " + att.value)
+            for (att in post.attachments) {
+                var d = att.type
+                //when(d){
+
+
+                if (att.type == "Video") {
+                    att as AttachmentVideo
+                    println("Вложение: " + att.type + " - " + att.video)
+
+                } else if (att.type == "Audio") {
+                    att as AttachmentAudio
+                    println("Вложение: " + att.type + " - " + att.audio)
+
+                } else if (att.type == "Docs") {
+                    att as AttachmentDocs
+                    println("Вложение: " + att.type + " - " + att.docs)
+
+                } else if (att.type == "Photo") {
+                    att as AttachmentPhoto
+                    println("Вложение: " + att.type + " - " + att.photo)
+
+                }
+
+
             }
         }
 
     }
-
 
 
 }
